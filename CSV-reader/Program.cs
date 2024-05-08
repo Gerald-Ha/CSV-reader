@@ -1,21 +1,53 @@
-﻿using System;
+using System;
 using System.IO;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        // ASCII-Art
+        string asciiArt = @"
+                     ⠸⣷⣦⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⠀⠀⠀
+    ⠀                 ⠙⣿⡄⠈⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠔⠊⠉⣿⡿⠁⠀⠀⠀
+    ⠀⠀                  ⠈⠣⡀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⣰⠟⠀⠀⠀⣀⣀
+    ⠀⠀⠀                 ⠀ ⠈⠢⣄⠀⡈⠒⠊⠉⠁⠀⠈⠉⠑⠚⠀⠀⣀⠔⢊⣠⠤⠒⠊⠉⠀⡜
+    ⠀⠀⠀⠀⠀⠀⠀                 ⠀⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠩⡔⠊⠁⠀⠀⠀⠀⠀⠀⠇
+    ⠀⠀⠀⠀⠀⠀⠀⠀                  ⡇⢠⡤⢄⠀⠀⠀⠀⠀⡠⢤⣄⠀⡇⠀⠀⠀⠀⠀⠀⠀⢰⠀
+    ⠀⠀⠀⠀⠀⠀⠀                  ⢀⠇⠹⠿⠟⠀⠀⠤⠀⠀⠻⠿⠟⠀⣇⠀⠀⡀⠠⠄⠒⠊⠃⠀
+    ⠀⠀⠀⠀⠀⠀⠀                  ⢸⣿⣿⡆⠀⠰⠤⠖⠦⠴⠀⢀⣶⣿⣿⠀⠙⢄⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀                  ⠀⠀⢻⣿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠿⡿⠛⢄⠀⠀⠱⣄⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀                  ⢸⠈⠓⠦⠀⣀⣀⣀⠀⡠⠴⠊⠹⡞⣁⠤⠒⠉⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀                  ⣠⠃⠀⠀⠀⠀⡌⠉⠉⡤⠀⠀⠀⠀⢻⠿⠆⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀                  ⠰⠁⡀⠀⠀⠀⠀⢸⠀⢰⠃⠀⠀⠀⢠⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀                   ⠀⢶⣗⠧⡀⢳⠀⠀⠀⠀⢸⣀⣸⠀⠀⠀⢀⡜⠀⣸⢤⣶⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀                   ⠈⠻⣿⣦⣈⣧⡀⠀⠀⢸⣿⣿⠀⠀⢀⣼⡀⣨⣿⡿⠁⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀                  ⠈⠻⠿⠿⠓⠄⠤⠘⠉⠙⠤⢀⠾⠿⣿⠟⠋";
+
+        // Hier wird die Farbe definiert
+        Console.ForegroundColor = ConsoleColor.Yellow;
+
+        // ASCII-Art anzeigen
+        Console.WriteLine(asciiArt);
+
+        // Farbe zurücksetzen
+        Console.ResetColor();
+
+        Console.WriteLine(); // Leerzeile
+        Console.WriteLine(); // Leerzeile 2
+
         try
         {
             Console.WriteLine("Bitte geben Sie den vollständigen Pfad zur CSV-Datei ein:");
-            string filePath = Console.ReadLine().Trim(); // Benutzereingabe lesen und führende/trailing Leerzeichen entfernen
+            string filePath = Console.ReadLine().Trim();
 
             if (File.Exists(filePath))
             {
                 // Liest den gesamten Inhalt der CSV-Datei, den man eingibt.
                 string[] lines = File.ReadAllLines(filePath);
 
-                // Bestimme die maximale Breite jeder Spalte
+                // Bestimme die maximale Breite jeder Spalte :D
                 int numColumns = lines[0].Split(',').Length;
                 int[] columnWidths = new int[numColumns];
 
